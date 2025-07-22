@@ -21,7 +21,7 @@ const HomePage = () => {
       <section className="relative bg-gray-900 text-white">
         <div className="absolute inset-0 overflow-hidden">
           <img 
-            src="https://www.purdue.edu/purdue/images/home/background-masthead.jpg" 
+            src="https://www.purdue.edu/hr/workremotely/images/Gateway.jpg"
             alt="Purdue Campus" 
             className="w-full h-full object-cover opacity-40"
           />
