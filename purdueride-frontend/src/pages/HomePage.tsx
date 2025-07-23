@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Layout from '../components/layout/Layout';
 import RideBookingForm from '../components/features/RideBookingForm';
 import type { RideFormData } from '../components/features/RideBookingForm';
@@ -6,6 +7,7 @@ import ServiceCard from '../components/features/ServiceCardNew';
 import Button from '../components/common/Button';
 
 const HomePage = () => {
+  const navigate = useNavigate();
   // State to store the submitted form data (used for debugging in development)
   const [_formData, setFormData] = useState<RideFormData | null>(null);
   
@@ -36,10 +38,19 @@ const HomePage = () => {
               PurdueRide connects you with reliable rides around campus and West Lafayette. Request a ride and arrive at your destination in minutes.
             </p>
             <div className="hidden md:block">
-              <Button variant="primary" size="lg">
+              <Button 
+                variant="primary" 
+                size="lg" 
+                onClick={() => navigate('/register')}
+              >
                 Sign up to ride
               </Button>
-              <Button variant="outline" size="lg" className="ml-4">
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="ml-4"
+                onClick={() => navigate('/register')}
+              >
                 Become a driver
               </Button>
             </div>

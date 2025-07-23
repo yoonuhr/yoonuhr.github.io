@@ -59,8 +59,8 @@
   - Write unit tests for layout components
   - _Requirements: 1.4, 5.1_
 
-- [-] 6. Build authentication system with placeholders
-- [-] 6.1 Create authentication context and hooks
+- [x] 6. Build authentication system with placeholders
+- [x] 6.1 Create authentication context and hooks
   - Implement AuthContext using React 18+ Context API patterns
   - Create useAuth hook with useCallback for stable function references
   - Add placeholder authentication methods (login, register, logout)
@@ -68,7 +68,7 @@
   - Use React 18 useId() for generating unique form IDs
   - _Requirements: 4.2, 4.3_
 
-- [ ] 6.2 Create login and registration forms with modern React patterns
+- [x] 6.2 Create login and registration forms with modern React patterns
   - Build LoginForm and RegisterForm using React 19 form action patterns
   - Implement forms with native HTML form validation and React enhancements
   - Add Purdue email validation using custom validation hooks
