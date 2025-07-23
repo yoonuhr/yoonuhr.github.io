@@ -21,7 +21,7 @@
   - Create error simulation for testing error handling
   - _Requirements: 2.2, 3.2, 4.2, 6.2_
 
-- [-] 4. Build common UI components
+- [x] 4. Build common UI components
 - [x] 4.1 Create base Button component with variants
   - Implement Button component with primary, secondary, and disabled states
   - Add proper TypeScript props and accessibility attributes
@@ -30,37 +30,37 @@
   - Write unit tests for Button component using React Testing Library
   - _Requirements: 1.4, 5.2_
 
-- [ ] 4.2 Create Input component with validation styling
+- [x] 4.2 Create Input component with validation styling
   - Build reusable Input component with error state styling
   - Add support for different input types (text, email, tel)
   - Implement validation state visual feedback
   - Write unit tests for Input component
   - _Requirements: 2.1, 4.1, 5.2_
 
-- [ ] 4.3 Create Modal and LoadingSpinner components
+- [x] 4.3 Create Modal and LoadingSpinner components
   - Implement Modal component with backdrop and close functionality
   - Create LoadingSpinner component for async operations
   - Add proper accessibility attributes and keyboard navigation
   - Write unit tests for both components
   - _Requirements: 2.2, 6.2_
 
-- [ ] 5. Implement layout components
-- [ ] 5.1 Create Header component with navigation
+- [x] 5. Implement layout components
+- [x] 5.1 Create Header component with navigation
   - Build responsive Header with PurdueRide branding
   - Implement navigation menu with mobile hamburger menu
   - Add user authentication state display (login/logout buttons)
   - Style with Tailwind CSS for mobile-first responsive design
   - _Requirements: 1.1, 5.1, 5.3_
 
-- [ ] 5.2 Create Footer and main Layout wrapper
+- [x] 5.2 Create Footer and main Layout wrapper
   - Implement Footer component with contact information and links
   - Create Layout component that wraps pages with Header and Footer
   - Ensure responsive design across all breakpoints
   - Write unit tests for layout components
   - _Requirements: 1.4, 5.1_
 
-- [ ] 6. Build authentication system with placeholders
-- [ ] 6.1 Create authentication context and hooks
+- [-] 6. Build authentication system with placeholders
+- [-] 6.1 Create authentication context and hooks
   - Implement AuthContext using React 18+ Context API patterns
   - Create useAuth hook with useCallback for stable function references
   - Add placeholder authentication methods (login, register, logout)
