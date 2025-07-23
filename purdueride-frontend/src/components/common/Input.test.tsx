@@ -198,3 +198,44 @@ describe('Input Component', () => {
     expect(secondId).toMatch(/input-[a-z0-9]+/);
   });
 });
+  it(
+'renders as textarea when as="textarea" prop is provided', () => {
+    render(<Input label="Comments" as="textarea" placeholder="Enter comments" />);
+    
+    const textarea = screen.getByPlaceholderText('Enter comments');
+    expect(textarea.tagName.toLowerCase()).toBe('textarea');
+  });
+
+  it('applies rows attribute to textarea', () => {
+    render(<Input label="Comments" as="textarea" rows={5} placeholder="Enter comments" />);
+    
+    const textarea = screen.getByPlaceholderText('Enter comments');
+    expect(textarea).toHaveAttribute('rows', '5');
+  });
+
+  it('applies the same styling to textarea as to input', () => {
+    render(<Input label="Comments" as="textarea" className="test-class" placeholder="Enter comments" />);
+    
+    const textarea = screen.getByPlaceholderText('Enter comments');
+    expect(textarea).toHaveClass('test-class');
+    expect(textarea).toHaveClass('rounded-md');
+    expect(textarea).toHaveClass('border');
+  });
+
+  it('handles focus and blur events for textarea', () => {
+    render(<Input label="Comments" as="textarea" placeholder="Enter comments" />);
+    
+    const textarea = screen.getByPlaceholderText('Enter comments');
+    const label = screen.getByText('Comments');
+    
+    // Initially, label should not have the focused class
+    expect(label).not.toHaveClass('text-purdue-gold');
+    
+    // Focus the textarea
+    fireEvent.focus(textarea);
+    expect(label).toHaveClass('text-purdue-gold');
+    
+    // Blur the textarea
+    fireEvent.blur(textarea);
+    expect(label).not.toHaveClass('text-purdue-gold');
+  });

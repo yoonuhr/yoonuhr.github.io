@@ -1,7 +1,7 @@
 import { forwardRef, useState } from 'react';
-import type { InputHTMLAttributes, ReactNode } from 'react';
+import type { InputHTMLAttributes, ReactNode, TextareaHTMLAttributes } from 'react';
 
-export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'as' | 'rows'> {
   /**
    * Input label text
    */
@@ -46,9 +46,19 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
    * Whether the input is required
    */
   required?: boolean;
+  
+  /**
+   * Render as a different element
+   */
+  as?: 'input' | 'textarea';
+  
+  /**
+   * Number of rows (for textarea)
+   */
+  rows?: number;
 }
 
-const Input = forwardRef<HTMLInputElement, InputProps>(
+const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps>(
   ({ 
     label, 
     error, 
@@ -63,6 +73,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     type = 'text',
     disabled = false,
     id,
+    as = 'input',
+    rows = 3,
     ...props 
   }, ref) => {
     const [isFocused, setIsFocused] = useState(false);
@@ -94,6 +106,18 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     // Combine all classes
     const combinedClasses = `${baseClasses} ${stateClasses} ${widthClass} ${disabledClasses} ${leftIconPadding} ${rightIconPadding} ${focusVisibleClasses} ${className}`;
     
+    // Common props for both input and textarea
+    const commonProps = {
+      id: uniqueId,
+      className: combinedClasses,
+      disabled,
+      'aria-invalid': !!error,
+      'aria-describedby': error ? `${uniqueId}-error` : helperText ? `${uniqueId}-helper` : undefined,
+      onFocus: () => setIsFocused(true),
+      onBlur: () => setIsFocused(false),
+      ...props
+    };
+    
     return (
       <div className={`${fullWidth ? 'w-full' : ''} mb-4`}>
         {label && (
@@ -113,18 +137,19 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             </div>
           )}
           
-          <input 
-            ref={ref} 
-            id={uniqueId}
-            className={combinedClasses} 
-            type={type}
-            disabled={disabled}
-            aria-invalid={!!error}
-            aria-describedby={error ? `${uniqueId}-error` : helperText ? `${uniqueId}-helper` : undefined}
-            onFocus={() => setIsFocused(true)}
-            onBlur={() => setIsFocused(false)}
-            {...props} 
-          />
+          {as === 'textarea' ? (
+            <textarea
+              ref={ref as React.ForwardedRef<HTMLTextAreaElement>}
+              rows={rows}
+              {...commonProps}
+            />
+          ) : (
+            <input 
+              ref={ref as React.ForwardedRef<HTMLInputElement>}
+              type={type}
+              {...commonProps}
+            />
+          )}
           
           {rightIcon && (
             <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-500">
