@@ -1,0 +1,58 @@
+{
+  "name": "purdueride-backend",
+  "version": "1.0.0",
+  "description": "Backend API server for PurdueRide ride-sharing application",
+  "main": "dist/server.js",
+  "scripts": {
+    "start": "node dist/server.js",
+    "dev": "nodemon src/server.ts",
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "purdue",
+    "ride-sharing",
+    "api",
+    "express",
+    "typescript"
+  ],
+  "author": "PurdueRide Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "type": "commonjs",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.52.1",
+    "@types/express": "^4.17.23",
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.0",
+    "express": "^4.21.2",
+    "express-rate-limit": "^8.0.1",
+    "helmet": "^8.1.0",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.1",
+    "winston": "^3.17.0"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
+    "@types/cors": "^2.8.19",
+    "@types/jest": "^30.0.0",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/morgan": "^1.9.10",
+    "@types/node": "^24.1.0",
+    "@types/supertest": "^6.0.3",
+    "jest": "^30.0.5",
+    "nodemon": "^3.1.10",
+    "supertest": "^7.1.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
