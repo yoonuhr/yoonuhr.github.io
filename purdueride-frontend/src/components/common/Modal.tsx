@@ -70,12 +70,12 @@ const Modal = ({
   const modalRef = useRef<HTMLDivElement>(null);
   const previousActiveElement = useRef<HTMLElement | null>(null);
   
-  // Size-specific classes
+  // Size-specific classes with responsive adjustments
   const sizeClasses = {
-    sm: 'max-w-sm',
-    md: 'max-w-md',
-    lg: 'max-w-lg',
-    xl: 'max-w-xl'
+    sm: 'max-w-[95%] sm:max-w-sm',
+    md: 'max-w-[95%] sm:max-w-md',
+    lg: 'max-w-[95%] sm:max-w-lg',
+    xl: 'max-w-[95%] sm:max-w-xl'
   };
   
   // Handle mounting (for SSR compatibility)
@@ -105,9 +105,19 @@ const Modal = ({
     // Save the currently focused element
     previousActiveElement.current = document.activeElement as HTMLElement;
     
-    // Focus the modal
+    // Focus the modal or the first focusable element
     if (modalRef.current) {
-      modalRef.current.focus();
+      // Find all focusable elements
+      const focusableElements = modalRef.current.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      
+      // Focus the first element if it exists, otherwise focus the modal itself
+      if (focusableElements.length > 0) {
+        (focusableElements[0] as HTMLElement).focus();
+      } else {
+        modalRef.current.focus();
+      }
     }
     
     // Create focus trap
@@ -117,6 +127,8 @@ const Modal = ({
       const focusableElements = modalRef.current.querySelectorAll(
         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
       );
+      
+      if (focusableElements.length === 0) return;
       
       const firstElement = focusableElements[0] as HTMLElement;
       const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement;
@@ -141,10 +153,13 @@ const Modal = ({
     
     // Prevent scrolling on body
     document.body.style.overflow = 'hidden';
+    // Add ARIA attributes to indicate modal is open
+    document.body.setAttribute('aria-hidden', 'true');
     
     return () => {
       document.removeEventListener('keydown', handleFocusTrap);
       document.body.style.overflow = '';
+      document.body.removeAttribute('aria-hidden');
       
       // Restore focus
       if (previousActiveElement.current) {
@@ -173,18 +188,20 @@ const Modal = ({
       role="dialog"
       aria-modal="true"
       aria-labelledby={title ? 'modal-title' : undefined}
+      aria-describedby="modal-description"
     >
       <div 
         ref={modalRef}
         className={`bg-white rounded-lg shadow-xl w-full ${sizeClasses[size]} ${className}`}
         tabIndex={-1}
         role="document"
+        aria-label={title || "Dialog content"}
       >
         {/* Header */}
         {(title || showCloseButton) && (
-          <div className="flex items-center justify-between p-4 border-b border-gray-200">
+          <div className="flex items-center justify-between p-3 sm:p-4 border-b border-gray-200">
             {title && (
-              <h2 id="modal-title" className="text-lg font-semibold text-gray-900">
+              <h2 id="modal-title" className="text-lg font-semibold text-gray-900 pr-2">
                 {title}
               </h2>
             )}
@@ -192,7 +209,7 @@ const Modal = ({
             {showCloseButton && (
               <button
                 type="button"
-                className="text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-purdue-gold rounded-md"
+                className="text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-purdue-gold rounded-md p-2 min-h-[44px] min-w-[44px] flex items-center justify-center"
                 onClick={onClose}
                 aria-label="Close modal"
               >
@@ -205,13 +222,13 @@ const Modal = ({
         )}
         
         {/* Body */}
-        <div className="p-4">
+        <div className="p-3 sm:p-4" id="modal-description">
           {children}
         </div>
         
         {/* Footer */}
         {footer && (
-          <div className="p-4 border-t border-gray-200">
+          <div className="p-3 sm:p-4 border-t border-gray-200">
             {footer}
           </div>
         )}

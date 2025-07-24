@@ -51,7 +51,7 @@ const LoadingSpinner = ({
   const combinedClasses = `${centeredClass} ${className}`;
   
   return (
-    <div className={combinedClasses} role="status" aria-live="polite" {...props}>
+    <div className={combinedClasses} role="status" aria-live="polite" data-testid="loading-spinner" {...props}>
       <svg 
         className={`animate-spin ${sizeClasses[size]} ${colorClasses[color]}`} 
         xmlns="http://www.w3.org/2000/svg" 

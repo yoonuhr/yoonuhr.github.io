@@ -8,9 +8,9 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   
   return (
-    <footer className="bg-gray-900 text-white pt-12 pb-8">
+    <footer className="bg-gray-900 text-white pt-12 pb-8" role="contentinfo" aria-label="Site footer">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Column 1 - About */}
           <div>
             <h3 className="text-lg font-bold mb-4 text-purdue-gold">PurdueRide</h3>
@@ -26,25 +26,25 @@ const Footer = () => {
           
           {/* Column 2 - Services */}
           <div>
-            <h3 className="text-lg font-bold mb-4 text-purdue-gold">Services</h3>
-            <ul className="space-y-2">
+            <h3 id="services-heading" className="text-lg font-bold mb-4 text-purdue-gold">Services</h3>
+            <ul className="space-y-2" aria-labelledby="services-heading">
               <li>
-                <Link to="/ride" className="text-gray-300 hover:text-purdue-gold transition-colors">
+                <Link to="/ride" className="text-gray-300 hover:text-purdue-gold transition-colors py-2 min-h-[44px] flex items-center">
                   Request a ride
                 </Link>
               </li>
               <li>
-                <Link to="/reserve" className="text-gray-300 hover:text-purdue-gold transition-colors">
+                <Link to="/reserve" className="text-gray-300 hover:text-purdue-gold transition-colors py-2 min-h-[44px] flex items-center">
                   Reserve a ride
                 </Link>
               </li>
               <li>
-                <Link to="/pricing" className="text-gray-300 hover:text-purdue-gold transition-colors">
+                <Link to="/pricing" className="text-gray-300 hover:text-purdue-gold transition-colors py-2 min-h-[44px] flex items-center">
                   Pricing
                 </Link>
               </li>
               <li>
-                <Link to="/drive" className="text-gray-300 hover:text-purdue-gold transition-colors">
+                <Link to="/drive" className="text-gray-300 hover:text-purdue-gold transition-colors py-2 min-h-[44px] flex items-center">
                   Become a driver
                 </Link>
               </li>
@@ -53,25 +53,25 @@ const Footer = () => {
           
           {/* Column 3 - Support */}
           <div>
-            <h3 className="text-lg font-bold mb-4 text-purdue-gold">Support</h3>
-            <ul className="space-y-2">
+            <h3 id="support-heading" className="text-lg font-bold mb-4 text-purdue-gold">Support</h3>
+            <ul className="space-y-2" aria-labelledby="support-heading">
               <li>
-                <Link to="/help" className="text-gray-300 hover:text-purdue-gold transition-colors">
+                <Link to="/help" className="text-gray-300 hover:text-purdue-gold transition-colors py-2 min-h-[44px] flex items-center">
                   Help center
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="text-gray-300 hover:text-purdue-gold transition-colors">
+                <Link to="/contact" className="text-gray-300 hover:text-purdue-gold transition-colors py-2 min-h-[44px] flex items-center">
                   Contact us
                 </Link>
               </li>
               <li>
-                <Link to="/safety" className="text-gray-300 hover:text-purdue-gold transition-colors">
+                <Link to="/safety" className="text-gray-300 hover:text-purdue-gold transition-colors py-2 min-h-[44px] flex items-center">
                   Safety
                 </Link>
               </li>
               <li>
-                <Link to="/faq" className="text-gray-300 hover:text-purdue-gold transition-colors">
+                <Link to="/faq" className="text-gray-300 hover:text-purdue-gold transition-colors py-2 min-h-[44px] flex items-center">
                   FAQ
                 </Link>
               </li>
@@ -80,18 +80,18 @@ const Footer = () => {
           
           {/* Column 4 - Contact */}
           <div>
-            <h3 className="text-lg font-bold mb-4 text-purdue-gold">Contact Us</h3>
-            <ul className="space-y-2">
-              <li className="flex items-center text-gray-300">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <h3 id="contact-heading" className="text-lg font-bold mb-4 text-purdue-gold">Contact Us</h3>
+            <ul className="space-y-2" aria-labelledby="contact-heading">
+              <li className="flex items-center text-gray-300 py-2 min-h-[44px]">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
                 <a href="mailto:info@purdueride.com" className="hover:text-purdue-gold transition-colors">
                   info@purdueride.com
                 </a>
               </li>
-              <li className="flex items-center text-gray-300">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <li className="flex items-center text-gray-300 py-2 min-h-[44px]">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
                 <a href="tel:+17654441234" className="hover:text-purdue-gold transition-colors">
@@ -114,7 +114,7 @@ const Footer = () => {
               href="https://facebook.com" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="text-gray-300 hover:text-purdue-gold transition-colors"
+              className="text-gray-300 hover:text-purdue-gold transition-colors p-2 min-h-[44px] min-w-[44px] flex items-center justify-center"
               aria-label="Facebook"
             >
               <span className="sr-only">Facebook</span>
@@ -126,7 +126,7 @@ const Footer = () => {
               href="https://instagram.com" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="text-gray-300 hover:text-purdue-gold transition-colors"
+              className="text-gray-300 hover:text-purdue-gold transition-colors p-2 min-h-[44px] min-w-[44px] flex items-center justify-center"
               aria-label="Instagram"
             >
               <span className="sr-only">Instagram</span>
@@ -138,7 +138,7 @@ const Footer = () => {
               href="https://twitter.com" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="text-gray-300 hover:text-purdue-gold transition-colors"
+              className="text-gray-300 hover:text-purdue-gold transition-colors p-2 min-h-[44px] min-w-[44px] flex items-center justify-center"
               aria-label="Twitter"
             >
               <span className="sr-only">Twitter</span>
@@ -148,7 +148,7 @@ const Footer = () => {
             </a>
           </div>
           
-          <div className="text-gray-400 text-sm">
+          <div className="text-gray-400 text-sm text-center">
             &copy; {currentYear} PurdueRide. All rights reserved.
           </div>
         </div>

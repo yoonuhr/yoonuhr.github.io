@@ -21,7 +21,8 @@ export interface RideRequestData {
 
 const RideRequestForm = ({ onSubmit, className = '' }: RideRequestFormProps) => {
   const formId = useId();
-  const { user } = useAuth();
+  // We're not using the user object directly to avoid the unused variable warning
+  useAuth(); // Just access auth context without destructuring
   const [isPending, startTransition] = useTransition();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);

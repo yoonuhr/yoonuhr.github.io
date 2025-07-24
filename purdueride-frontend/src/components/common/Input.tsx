@@ -1,5 +1,5 @@
 import { forwardRef, useState } from 'react';
-import type { InputHTMLAttributes, ReactNode, TextareaHTMLAttributes } from 'react';
+import type { InputHTMLAttributes, ReactNode } from 'react';
 
 export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'as' | 'rows'> {
   /**
@@ -80,8 +80,8 @@ const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps>(
     const [isFocused, setIsFocused] = useState(false);
     const uniqueId = id || `input-${Math.random().toString(36).substring(2, 9)}`;
     
-    // Base classes that apply to all inputs
-    const baseClasses = 'rounded-md border px-4 py-2 transition-colors focus:outline-none focus:ring-2';
+    // Base classes that apply to all inputs - ensuring 44px minimum touch target
+    const baseClasses = 'rounded-md border px-4 py-3 transition-colors focus:outline-none focus:ring-2 min-h-[44px] text-base w-full';
     
     // State-specific classes
     const stateClasses = error 
@@ -111,22 +111,30 @@ const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps>(
       id: uniqueId,
       className: combinedClasses,
       disabled,
-      'aria-invalid': !!error,
-      'aria-describedby': error ? `${uniqueId}-error` : helperText ? `${uniqueId}-helper` : undefined,
+      'aria-invalid': error ? true : undefined,
+      'aria-required': required ? true : undefined,
+      'aria-describedby': error 
+        ? `${uniqueId}-error` 
+        : successMessage && isValid 
+          ? `${uniqueId}-success` 
+          : helperText 
+            ? `${uniqueId}-helper` 
+            : undefined,
       onFocus: () => setIsFocused(true),
       onBlur: () => setIsFocused(false),
       ...props
     };
     
     return (
-      <div className={`${fullWidth ? 'w-full' : ''} mb-4`}>
+      <div className={`${fullWidth ? 'w-full' : ''} mb-4 sm:mb-6`}>
         {label && (
           <label 
             htmlFor={uniqueId}
             className={`block text-gray-700 font-medium mb-1 ${isFocused ? 'text-purdue-gold' : ''}`}
           >
             {label}
-            {required && <span className="text-red-500 ml-1">*</span>}
+            {required && <span className="text-red-500 ml-1" aria-hidden="true">*</span>}
+            {required && <span className="sr-only">(required)</span>}
           </label>
         )}
         
@@ -141,7 +149,19 @@ const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps>(
             <textarea
               ref={ref as React.ForwardedRef<HTMLTextAreaElement>}
               rows={rows}
-              {...commonProps}
+              id={uniqueId}
+              className={combinedClasses}
+              disabled={disabled}
+              aria-invalid={error ? true : undefined}
+              aria-required={required ? true : undefined}
+              aria-describedby={error 
+                ? `${uniqueId}-error` 
+                : helperText 
+                  ? `${uniqueId}-helper` 
+                  : undefined}
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
+              {...(props as unknown as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}
             />
           ) : (
             <input 
